@@ -29,7 +29,7 @@ const AppointmentBanner = () => {
                             Appointment
                         </Typography>
                         <Typography variant="h4" style={{ color: 'white' }} component="div">
-                            Make an Appointment Today
+                            Make an Appointment <br /> Today
                         </Typography>
                         <Typography variant="p" sx={{ my: 5 }} style={{ color: 'white', fontWeight: 300 }} component="div">
                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias totam quam facilis. Quasi vitae voluptas pariatur iure perspiciatis ea enim!
