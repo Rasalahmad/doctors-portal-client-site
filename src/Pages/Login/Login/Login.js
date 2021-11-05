@@ -30,6 +30,7 @@ const Login = () => {
                     <Typography variant="h3" gutterBottom>
                         Login
                     </Typography>
+                    {isLoading ? <CircularProgress /> :
                     <form onSubmit={handleLoginSubmit}>
                         <TextField
                             sx={{ width: '75%', m: 1 }}
@@ -56,8 +57,7 @@ const Login = () => {
                              to='/register'>
                                 <Button variant='text'>New User? Please Register</Button>
                             </NavLink>
-                    </form>
-                    {isLoading && <CircularProgress />}
+                    </form>}
                     {user?.email && <Alert severity="success">Login Successfully</Alert>}
                     {authError && <Alert severity="error">{authError}</Alert>}
                 </Grid>
