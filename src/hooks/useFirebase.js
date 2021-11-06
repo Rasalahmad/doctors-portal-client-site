@@ -1,6 +1,6 @@
 import initializeFirebase from "../Pages/Login/firebase/firebase.init";
 import { useState, useEffect } from 'react';
-import { getAuth, createUserWithEmailAndPassword, signOut, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signOut, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 
 // initialize firebase
@@ -11,7 +11,7 @@ const useFirebase = () => {
     const [authError, setAuthError] = useState('');
 
     const auth = getAuth();
-
+    const googleProvider = new GoogleAuthProvider();
     // register user
     const registerUser = (email, password) => {
         setIsLoading(true)
@@ -25,23 +25,23 @@ const useFirebase = () => {
                 // ..
             })
             .finally(() => setIsLoading(false))
-            
+
     }
     // register user
     const loginUser = (email, password, location, history) => {
         setIsLoading(true)
         signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const destination = location?.state?.from || '/';
-            history.replace(destination);
-            setAuthError('');
-            // ...
-          })
-          .catch((error) => {
-            setAuthError(error.message);
-          })
-          .finally(() => setIsLoading(false));
-        
+            .then((userCredential) => {
+                const destination = location?.state?.from || '/';
+                history.replace(destination);
+                setAuthError('');
+                // ...
+            })
+            .catch((error) => {
+                setAuthError(error.message);
+            })
+            .finally(() => setIsLoading(false));
+
     }
 
     const logOut = () => {
@@ -55,18 +55,32 @@ const useFirebase = () => {
             })
             .finally(() => setIsLoading(false));
     }
-    
 
-    useEffect( () => {
+    const signInWithGoogle = (location, history) => {
+        setIsLoading(true);
+        signInWithPopup(auth, googleProvider)
+            .then((result) => {
+                const user = result.user;
+                setAuthError('');
+                // ...
+            }).catch((error) => {
+                setAuthError(error.message)
+            })
+            .finally(() => setIsLoading(false));
+
+    }
+
+
+    useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
-              setUser(user)
+                setUser(user)
             } else {
-              setUser({});
+                setUser({});
             }
             setIsLoading(false)
-          });
-          return () => unSubscribe;
+        });
+        return () => unSubscribe;
     }, [])
 
     return {
@@ -74,6 +88,7 @@ const useFirebase = () => {
         isLoading,
         authError,
         registerUser,
+        signInWithGoogle,
         loginUser,
         logOut
     }
