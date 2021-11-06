@@ -33,7 +33,7 @@ const Register = () => {
         <Container>
             <Grid container spacing={2}>
                 <Grid item xs={12} md={6} sx={{mt: 8}}>
-                    <Typography variant="h3" gutterBottom>
+                    <Typography variant="h3">
                         Register
                     </Typography>
                     {!isLoading && <form onSubmit={handleLoginSubmit}>
