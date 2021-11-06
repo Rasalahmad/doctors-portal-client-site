@@ -11,7 +11,7 @@ const Login = () => {
     const location = useLocation();
     const history = useHistory();
 
-    const handleOnChange = e => {
+    const handleOnBlur = e => {
         const field = e.target.name;
         const value = e.target.value;
         const newLoginData = {...loginData};
@@ -38,25 +38,17 @@ const Login = () => {
                         <TextField
                             sx={{ width: '75%', m: 1 }}
                             id="standard-basic"
-                            label="Your Name"
-                            type="text"
-                            name="name"
-                            onChange={handleOnChange}
-                            variant="standard" />
-                        <TextField
-                            sx={{ width: '75%', m: 1 }}
-                            id="standard-basic"
                             type="email"
                             label="Your Email"
                             name="email"
-                            onChange={handleOnChange}
+                            onBlur={handleOnBlur}
                             variant="standard" />
                         <TextField
                             sx={{ width: '75%', m: 1 }}
                             id="standard-basic"
                             label="Password"
                             name="password"
-                            onChange={handleOnChange}
+                            onBlur={handleOnBlur}
                             type="password"
                             variant="standard" />
                             <Button 
