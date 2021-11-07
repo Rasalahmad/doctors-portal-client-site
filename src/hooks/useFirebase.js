@@ -20,11 +20,12 @@ const useFirebase = () => {
                 setAuthError('');
                 const newUser = {email, displayName: name}
                 setUser(newUser);
+                // save user to database 
+                saveUser(email, name, 'POST')
                 updateProfile(auth.currentUser, {
                     displayName: name
                   }).then(() => {
-                    // Profile updated!
-                    // ...
+                    
                   }).catch((error) => {
                     // An error occurred
                     // ...
@@ -72,9 +73,12 @@ const useFirebase = () => {
         setIsLoading(true);
         signInWithPopup(auth, googleProvider)
             .then((result) => {
+                const destination = location?.state?.from || '/';
+                history.replace(destination);
                 const user = result.user;
                 setAuthError('');
-                // ...
+                // save to database
+                saveUser(user.email, user.displayName, 'PUT')
             }).catch((error) => {
                 setAuthError(error.message)
             })
@@ -93,7 +97,18 @@ const useFirebase = () => {
             setIsLoading(false)
         });
         return () => unSubscribe;
-    }, [])
+    }, []);
+
+    const saveUser = (email, displayName, method) => {
+        const user = {email, displayName}
+        fetch('http://localhost:5000/users', {
+            method: method,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+    }
 
     return {
         user,
