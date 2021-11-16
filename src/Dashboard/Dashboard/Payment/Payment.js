@@ -15,7 +15,7 @@ const Payment = () => {
             .then(res => res.json())
             .then(data => setAppointment(data));
     }, [appointmentId]);
-    console.log(appointment)
+    // console.log(appointment)
     return (
         <div>
             <h2>Please Pay for: {appointment.patientName} for {appointment.serviceName}</h2>

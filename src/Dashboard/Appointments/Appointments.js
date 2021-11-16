@@ -14,15 +14,14 @@ const Appointments = ({ date }) => {
     const [appointments, setAppointments] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/appointments?email=${user.email}&date=${date}`, {
+        const url = `http://localhost:5000/appointments?email=${user.email}&date=${date.toLocaleDateString()}`
+        fetch(url, {
             headers: {
                 'authorization': `Bearer ${token}`
             }
         })
             .then(res => res.json())
-            .then(data => {
-                setAppointments(data);
-            })
+            .then(data => setAppointments(data));
     }, [date, user.email, token])
 
     return (

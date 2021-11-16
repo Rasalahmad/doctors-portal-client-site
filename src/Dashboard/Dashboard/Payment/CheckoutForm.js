@@ -72,7 +72,7 @@ const CheckoutForm = ({ appointment }) => {
         else {
             setError('');
             setSuccess('Your payment processed successfully.')
-            console.log(paymentIntent);
+            // console.log(paymentIntent);
             setProcessing(false);
             // save to database
             const payment = {
