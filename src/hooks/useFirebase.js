@@ -103,7 +103,7 @@ const useFirebase = () => {
             setIsLoading(false)
         });
         return () => unSubscribe;
-    }, []);
+    }, [auth]);
 
     const saveUser = (email, displayName, method) => {
         const user = {email, displayName}
