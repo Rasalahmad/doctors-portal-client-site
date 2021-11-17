@@ -18,7 +18,7 @@ const AddDoctor = () => {
         formData.append('image', image);
 
 
-        fetch('http://localhost:5000/doctors', {
+        fetch('https://calm-bastion-45127.herokuapp.com/doctors', {
             method: 'POST',
             body: formData
         })
