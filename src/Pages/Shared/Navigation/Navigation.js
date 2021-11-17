@@ -27,11 +27,15 @@ const Navigation = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Doctors
           </Typography>
-          <Link to='/appointment'>
-            <Button color="inherit">Appointment</Button>
-          </Link>
-          <Link to='/home'>
+          <Link
+          style={{ textDecoration: 'none', color: '#fff' }} 
+          to='/home'>
             <Button color="inherit">Home</Button>
+          </Link>
+          <Link 
+          style={{ textDecoration: 'none', color: '#fff' }} 
+          to='/appointment'>
+            <Button color="inherit">Appointment</Button>
           </Link>
           {
             user?.email ?
@@ -40,13 +44,13 @@ const Navigation = () => {
                   <Button color="inherit">Dashboard</Button>
                 </NavLink>
                 <Button onClick={logOut} color="inherit">Logout</Button>
-
               </Box>
               :
               <NavLink style={{ textDecoration: 'none', color: '#fff' }} to='/login'>
                 <Button color="inherit">Login</Button>
               </NavLink>
           }
+          <img style={{width: '35px', borderRadius:'50%'}} src={user?.photoURL} alt=""/>
         </Toolbar>
       </AppBar>
     </Box>
