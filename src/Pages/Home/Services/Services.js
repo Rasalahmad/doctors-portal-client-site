@@ -31,9 +31,6 @@ const Services = () => {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Container>
-                <Typography sx={{ color: 'success.main', fontWeight: 600, m: 2 }} variant="h6" component="div">
-                    OUR SERVICES
-                </Typography>
                 <Typography sx={{ fontWeight: 600, m: 5 }} variant="h4" component="div">
                     Services We Provide 
                 </Typography>
